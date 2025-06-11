@@ -1,0 +1,3 @@
+Total frames: 110
+Total sunglasses: 100
+Total items in inventory: 210
