@@ -196,8 +196,6 @@ def place_order():
             print("Please add some products into cart first.")
             print()
         else:
-
-
             print(f"Placing order for the {cart}")
             frames -= cart_frame
             sunglasses -= cart_sunglass
