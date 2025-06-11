@@ -23,11 +23,13 @@ def main():
     while True:
         print(f"Current frames: {frames}, Current sunglasses: {sunglasses}")
         print("You can add more frames or sunglasses in inventory.")
+        print("To place an order add the products into cart.")
         print("1. Add to inventory")
         print("2. Add to cart")
         print("3. Place order")
         print("4. Exit")
         choice = input("Enter your choice (1-3): ")
+        print()
         if choice == '4':
             print("Exiting the program.")
             print()
@@ -58,43 +60,40 @@ def main():
 
 def add_to_inventory():
     global frames , sunglasses, total , inventory, cart , usernames
-    print(f"Current frames: {frames}, Current sunglasses: {sunglasses} in inventory.")
-    print("You can add more frames or sunglasses.")
-    print("What do you want to add in inventory\n" \
-    "1: Frames\n" \
-    "2: Sunglasses\n")
-    add_to = input("Enter your choice (1-2): ")
-    if add_to == "1":
-        user = input("Enter your username: ")
-        passw = input("Enter your passward: ")
-        if user in usernames and login_ids.get(user) == passw:
+    user = input("Enter your username: ")
+    password = input("Enter your password: ")
+    print()
+    if user in usernames and login_ids.get(user) == password:
+        print(f"Current frames: {frames}, Current sunglasses: {sunglasses} in inventory.")
+        print("You can add more frames or sunglasses.")
+        print("What do you want to add in inventory?\n" \
+        "1: Frames\n" \
+        "2: Sunglasses\n"
+        "3: Back")
+        add_to = input("Enter your choice (1-2): ")
+        print()
+        if add_to == "1":
             add_frame()
-        else:
-            print("Please enter a valid username and passward")
-
-        # if username in usernames and passward in passwards :
-        #     add_frame()
-        # else:
-        #     print("Please enter a valid username and passward")
-    elif add_to == "2":
-        user = input("Enter your username: ")
-        passward = input("Enter your passward: ")
-        if user in usernames and login_ids.get(user) == passward:
+            return
+        elif add_to == "2":
             add_sunglass()
-        else:
-            print("Please enter a valid username and passward")
+            return   
+        elif add_to == "3":
+            return    
+        else: 
+            print("Please enter a valid response.")
 
+    else:
+        print("Please enter a valid username and passward")
 
-        
-    else: 
-        print("Please enter a valid response.")
 
 
 
 def add_frame():
     global frames , sunglasses, total , inventory, cart
     print("Adding frames to the inventory...")
-    more_frames = int(input("How many frames you want to add: "))
+    more_frames = int(input("How many frames you want to add? "))
+    print()
     frames += more_frames 
     total = frames + sunglasses
     print(f"{more_frames} frames added in the inventory.")
@@ -106,7 +105,8 @@ def add_frame():
 def add_sunglass():
     global frames , sunglasses , total, inventory ,cart
     print("Adding sunglasses to the inventory...")
-    more_sunglasses = int(input("How many sunglasses you want to add: "))
+    more_sunglasses = int(input("How many sunglasses you want to add? "))
+    print()
     sunglasses += more_sunglasses 
     total = frames + sunglasses
     print(f"{more_sunglasses} sunglasses added in the inventory.")
@@ -119,13 +119,21 @@ def add_sunglass():
 def add_to_cart():
     global frames , sunglasses , cart_frame , cart_sunglass, total, inventory,cart
     print("Select your option to add in cart: \n"
-    "1:Frame\n"
-    "2:Sunglass")
+    "1: Frame\n"
+    "2: Sunglass\n"
+    "3: Back ")
     cart_options = input("Enter your choice (1-2): ")
+    print()
     if cart_options == "1":
         frame_cart()
+        add_to_cart()
+        # print("Do you want to add more product into cart? ")
+        # add_more = input("To add more product into cart enter 'yes")
     elif cart_options == "2":
         sunglass_cart()
+        add_to_cart()
+    elif cart_options == "3":
+        return
     else:
         print("Please enter a valid option from the list.")
     cart = {"frame_cart": cart_frame , "sunglass_cart": cart_sunglass}
@@ -146,7 +154,7 @@ def frame_cart():
     print(cart)
     #print(f"Total frames and sunglasses are: {total} amoung there are {frames} and {sunglasses}")
     inventory = {"frames": frames, "sunglasses": sunglasses}
-    #print(f"Updated inventory: {inventory}")
+
     print()
     return cart_frame 
 
@@ -166,24 +174,40 @@ def sunglass_cart():
     print(cart)
     #print(f"Total frames and sunglasses are: {total} amoung there are {frames} and {sunglasses}")
     inventory = {"frames": frames, "sunglasses": sunglasses}
-    #print(f"Updated inventory: {inventory}")
+   
     print()
     return cart_sunglass
 
 
 def place_order():
     global frames , sunglasses, total ,inventory,  cart_frame , cart_sunglass, cart
-    # cart_frame -= cart_frame
-    # cart_sunglass -= cart_sunglass
-    cart = {"frame_cart": cart_frame , "sunglass_cart": cart_sunglass}
-    print(f"Placing order for the {cart}")
-    frames -= cart_frame
-    sunglasses -= cart_sunglass
-    total =  frames + sunglasses
-    inventory = {"frames": frames, "sunglasses": sunglasses}
-    print(f"Updated inventory: {inventory}")
+    print(f"You have {cart_frame} frames and {cart_sunglass} sunglasses in your cart.")
+    confirmation = input("To confirm your order enter 'Yes' to cancel enter 'No': ").strip().lower()
     print()
-    return cart 
+    if confirmation == "no":
+        print("Order not placed.")
+        print("Taking you to homepage\n"
+        "To exit enter '4' ")
+        print()
+        return 
+    else:
+        cart = {"frame_cart": cart_frame , "sunglass_cart": cart_sunglass}
+        if cart_frame == 0  and cart_sunglass == 0 :
+            print("Please add some products into cart first.")
+            print()
+        else:
+
+
+            print(f"Placing order for the {cart}")
+            frames -= cart_frame
+            sunglasses -= cart_sunglass
+            total =  frames + sunglasses
+            cart_frame = 0 
+            cart_sunglass = 0 
+            inventory = {"frames": frames, "sunglasses": sunglasses}
+            print(f"Updated inventory: {inventory}")
+            print()
+            return cart 
 
 
 
