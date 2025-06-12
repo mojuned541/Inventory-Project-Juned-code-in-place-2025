@@ -186,6 +186,11 @@ def place_order():
     print()
     if confirmation == "no":
         print("Order not placed.")
+        delete_cart = input("Do you want to delete cart? ")
+        print()
+        if delete_cart == "yes":
+            clear_cart()
+    
         print("Taking you to homepage\n"
         "To exit enter '4' ")
         print()
@@ -206,6 +211,17 @@ def place_order():
             print(f"Updated inventory: {inventory}")
             print()
             return cart 
+
+
+def clear_cart():
+    global frames , sunglasses, total ,inventory,  cart_frame , cart_sunglass, cart
+    cart_frame = 0 
+    cart_sunglass = 0 
+    cart = {"frame_cart": cart_frame , "sunglass_cart": cart_sunglass}
+    print(cart)
+    #print(f"Updated inventory: {inventory}")
+    print()
+    
 
 
 
