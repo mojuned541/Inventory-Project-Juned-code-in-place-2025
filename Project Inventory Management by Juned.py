@@ -186,7 +186,7 @@ def place_order():
     print()
     if confirmation == "no":
         print("Order not placed.")
-        delete_cart = input("Do you want to delete cart? ")
+        delete_cart = input("Do you want to delete cart? ").strip().lower()
         print()
         if delete_cart == "yes":
             clear_cart()
