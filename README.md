@@ -15,3 +15,6 @@ Added a login method to the inventory management system before adding the invent
 
 Here are the login credentials for testing the code : usernames = ["admin","juned", "user"] 
 login_ids = {"admin": "admin123", "juned":"juned123", "user": "user123"}
+
+
+Note - For some reason Global variables are not supported in Code in Place IDE so I wrote my project in a different IDE "V S Code" , kindly use VS Code to test the submitted project for efficient result.
