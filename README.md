@@ -6,8 +6,11 @@ at a optical shop an optician uses some kind of inventory management to keep cou
 This is a program that will keep count of inventory in a reatail outlet for different products, currently there are two products "Frames" and "Sunglasses". 
 
 I am thankful to the team behind Code in Place Stanford`s CS106A course specially Professor Chris Piech, Professor Mehran Sahami, our Section leader Kainat Ijaz and my section team.
-user can add more product in inventory by using their login credentials provided at the end of description. 
-customer can see the available stocks and add the product in cart and then they can place an order for the product of their choice.
+
+Users can add more product in inventory by using their login credentials provided at the end of description. 
+
+Customer can see the available stocks and add the product in cart and then they can place an order for the product of their choice.
+
 Added a login method to the inventory management system before adding the inventory so only verified users can add items in the inventory username and password are stored in a list and dictionary.
 
 Here are the login credentials for testing the code : usernames = ["admin","juned", "user"] 
